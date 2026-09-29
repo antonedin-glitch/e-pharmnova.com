@@ -81,8 +81,9 @@ td.bar{padding:0;position:relative;height:56px}
 .stat div{border-left:3px solid var(--accent);padding-left:14px}
 .stat b{display:block;font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .stat span{color:var(--muted);font-size:.95rem}
-.person{display:grid;grid-template-columns:96px 1fr;gap:20px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;max-width:720px}
-.avatar{width:96px;height:96px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.8rem}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.person{display:grid;grid-template-columns:80px 1fr;gap:18px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;min-width:0}
+.avatar{width:80px;height:80px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.8rem}
 .person h3{font-size:1.25rem}
 .person .role{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.06em;margin-bottom:10px}
 .person p{font-size:1rem;margin-bottom:8px}
@@ -205,6 +206,7 @@ footer a{color:var(--muted);text-decoration:none;margin-right:16px}
 <div class="wrap">
 <div class="eyebrow">Team</div>
 <h2>Built by clinicians who run trials</h2>
+<div class="people">
 <div class="person">
 <div class="avatar">AE</div>
 <div>
@@ -214,13 +216,23 @@ footer a{color:var(--muted);text-decoration:none;margin-right:16px}
 <p class="muted">Leads target selection, clinical strategy and partnerships.</p>
 </div>
 </div>
+<div class="person">
+<div class="avatar">SF</div>
+<div>
+<h3>Sophia Flora</h3>
+<div class="role">SOFTWARE DEVELOPER · DISCOVERY AI</div>
+<p>Builds and runs the Discovery AI pipeline: data ingestion, GPU screening workflows, containerized and orchestrated with Docker and Nextflow.</p>
+<p class="muted">Technical contact for platform, infrastructure and compute.</p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="careers">
 <div class="wrap split">
 <div>
 <div class="eyebrow">Careers</div>
-<h2>We are hiring the first technical team</h2>
+<h2>We are growing the technical team</h2>
 <p class="muted">Remote-first. Latin America and Europe time zones preferred. Write to us with a short note and links to your work.</p>
 </div>
 <div class="jobs">
@@ -235,7 +247,7 @@ footer a{color:var(--muted);text-decoration:none;margin-right:16px}
 <div class="eyebrow">News</div>
 <h2>Updates</h2>
 <div class="news">
-<div><time>Sep 2026</time><span>Platform architecture and six-month repurposing pilot defined; hiring for the first technical roles opens.</span></div>
+<div><time>Sep 2026</time><span>Discovery AI platform architecture and six-month repurposing pilot defined; e-pharmnova.com launched.</span></div>
 <div><time>Jun 2026</time><span>E-PharmNova Holdings Inc. incorporated in Delaware, USA.</span></div>
 </div>
 </div>
