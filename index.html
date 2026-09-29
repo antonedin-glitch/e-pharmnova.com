@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="E-PharmNova Holdings Inc. — AI drug discovery for the biology of aging: open-weight models, NVIDIA GPU screening, and a Phase I clinical research unit in Panama.">
+<title>E-PharmNova — AI drug discovery for the biology of aging</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+--bg:#f5f7f6; --surface:#ffffff; --fg:#0f1a17; --muted:#5b6b66; --line:#d9e0dc;
+--accent:#0b7a5e; --accent-ink:#ffffff; --accent-soft:#dff0e9;
+--hero-bg:#0b1512; --hero-fg:#eef4f1; --hero-muted:#9fb3ab; --hero-accent:#5fd3ad;
+--code-bg:#e9efec;
+--display:"Manrope","Helvetica Neue",Arial,sans-serif;
+--body:"Source Serif 4",Georgia,"Times New Roman",serif;
+--mono:"IBM Plex Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root{
+--bg:#0d1411; --surface:#141d19; --fg:#e7eeea; --muted:#95a8a0; --line:#25312c;
+--accent:#5fd3ad; --accent-ink:#06120e; --accent-soft:#173027; --code-bg:#1a2520; color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17.5px;line-height:1.6;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin-bottom:18px}
+h3{font-size:1.1rem;margin-bottom:6px}
+p{margin:0 0 14px;max-width:66ch}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.muted{color:var(--muted)}
+.btn{display:inline-block;font-family:var(--display);font-weight:700;text-decoration:none;padding:12px 22px;border-radius:6px;background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:inherit;border:1px solid currentColor}
+.btn:focus-visible{outline:3px solid var(--accent-soft)}
+header{position:sticky;top:0;z-index:5;background:var(--hero-bg);color:var(--hero-fg);border-bottom:1px solid rgba(255,255,255,.08)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-weight:800;font-size:1.3rem;text-decoration:none;color:var(--hero-fg);letter-spacing:-.02em}
+.logo span{color:var(--hero-accent)}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{font-family:var(--display);font-weight:600;font-size:.92rem;color:var(--hero-muted);text-decoration:none}
+nav a:hover,nav a:focus-visible{color:var(--hero-fg)}
+.hero{background:var(--hero-bg);color:var(--hero-fg);position:relative;overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.55}
+.hero .wrap{position:relative;padding-block:96px 88px}
+.hero h1{font-size:clamp(2.4rem,6vw,4.4rem);max-width:15ch;margin-bottom:22px;font-weight:800}
+.hero .lede{font-size:1.25rem;max-width:54ch;color:var(--hero-muted);margin-bottom:26px}
+.hero .btn{background:var(--hero-accent);color:#06120e}
+.hero .btn.ghost{background:transparent;color:var(--hero-fg);border-color:rgba(255,255,255,.35);margin-left:10px}
+.hero .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+.hero .tags span{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--hero-muted);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 12px}
+section{padding-block:72px;border-bottom:1px solid var(--line)}
+.mission{font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:1.35;max-width:32ch;text-wrap:balance}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+.split>div{min-width:0}
+@media (max-width:760px){.split{grid-template-columns:1fr;gap:28px}}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.cards>div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;min-width:0}
+.cards .n{font-family:var(--mono);font-size:.74rem;color:var(--accent);margin-bottom:10px;letter-spacing:.08em}
+.cards p{font-size:1rem;margin:0;color:var(--muted)}
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-family:var(--display);font-size:.92rem}
+th,td{padding:14px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+th.stage{text-align:center}
+tr:last-child td{border-bottom:0}
+td.prog{font-weight:700}
+td.prog small{display:block;font-family:var(--body);font-weight:400;color:var(--muted);font-size:.9rem}
+td.bar{padding:0;position:relative;height:56px}
+.fill{position:absolute;left:0;top:19px;height:18px;background:var(--accent);border-radius:0 9px 9px 0;opacity:.9}
+.fill.plan{background:transparent;border:2px dashed var(--accent);opacity:.7;top:18px}
+.legend{display:flex;gap:18px;margin-top:12px;font-size:.9rem;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:22px;height:10px;vertical-align:middle;margin-right:6px;border-radius:5px;background:var(--accent)}
+.legend i.plan{background:transparent;border:2px dashed var(--accent);height:8px}
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:22px}
+.stack div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.stack .t{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stack code{font-family:var(--mono);font-size:.86rem;background:var(--code-bg);padding:2px 6px;border-radius:4px;display:inline-block;margin:2px 4px 2px 0}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin-top:26px}
+.stat div{border-left:3px solid var(--accent);padding-left:14px}
+.stat b{display:block;font-family:var(--display);font-size:1.7rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:.95rem}
+.person{display:grid;grid-template-columns:96px 1fr;gap:20px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;max-width:720px}
+.avatar{width:96px;height:96px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.8rem}
+.person h3{font-size:1.25rem}
+.person .role{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.06em;margin-bottom:10px}
+.person p{font-size:1rem;margin-bottom:8px}
+@media (max-width:520px){.person{grid-template-columns:1fr}}
+.jobs{display:grid;gap:12px;margin-top:8px}
+.job{display:flex;justify-content:space-between;gap:16px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:var(--surface);flex-wrap:wrap}
+.job b{font-family:var(--display)}
+.job span{color:var(--muted);font-size:.92rem}
+.news{display:grid;gap:0;border-top:1px solid var(--line)}
+.news div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.news time{font-family:var(--mono);font-size:.8rem;color:var(--muted);padding-top:4px}
+.news div>span{min-width:0}
+@media (max-width:520px){.news div{grid-template-columns:1fr;gap:4px}}
+.contact{background:var(--hero-bg);color:var(--hero-fg);border-radius:14px;padding:40px 32px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
+.contact .eyebrow{color:var(--hero-accent)}
+.contact h2{color:var(--hero-fg)}
+.contact p{color:var(--hero-muted)}
+.contact .mail{font-family:var(--mono);font-size:1.05rem;color:var(--hero-fg);user-select:all}
+.contact a.mail{text-decoration:none}
+.contact dl{margin:0;display:grid;gap:14px}
+.contact dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--hero-muted)}
+.contact dd{margin:2px 0 0;font-family:var(--display);font-weight:600}
+@media (max-width:760px){.contact{grid-template-columns:1fr;padding:28px 22px}}
+footer{padding-block:32px 48px;font-size:.9rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--muted);text-decoration:none;margin-right:16px}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<a class="logo" href="#top">E-Pharm<span>Nova</span></a>
+<nav>
+<a href="#platform">Platform</a>
+<a href="#pipeline">Pipeline</a>
+<a href="#compute">Compute &amp; data</a>
+<a href="#team">Team</a>
+<a href="#careers">Careers</a>
+<a href="#news">News</a>
+<a href="#contact">Partner with us</a>
+</nav>
+</div>
+</header>
+<div class="hero" id="top">
+<canvas id="mol" aria-hidden="true"></canvas>
+<div class="wrap">
+<div class="eyebrow" style="color:var(--hero-accent)">AI-native drug discovery for the biology of aging</div>
+<h1>Medicines for healthspan, discovered by AI, proven in the clinic.</h1>
+<p class="lede">E-PharmNova combines open-weight structural and generative models, GPU-scale screening, and a Phase I clinical research unit to turn targets of aging into clinical candidates in months, not years.</p>
+<a class="btn" href="#platform">Explore the platform</a><a class="btn ghost" href="#contact">Partner with us</a>
+<div class="tags"><span>Delaware, USA</span><span>Panama City, Panama</span><span>Founded 2026</span><span>GPU-accelerated</span></div>
+</div>
+</div>
+<section>
+<div class="wrap split">
+<p class="mission">Ninety percent of drug programs fail in the clinic. We start from molecules with known human safety, let AI find the ones that act on aging biology, and test them where we already run trials.</p>
+<div>
+<p>Large pharma is spending billions on AI laboratories. We take a different route: open models with commercial licences, cloud and on-premise NVIDIA GPUs, outsourced wet labs, and a rare asset that most AI-first biotechs lack — our own early-phase clinical infrastructure and, with informed consent, the longitudinal clinical and omics data it generates.</p>
+<p class="muted">Aging itself is not an indication. Every program is framed around a concrete condition or a validated biomarker endpoint in a defined population, under ethics-committee and regulator approval.</p>
+</div>
+</div>
+</section>
+<section id="platform">
+<div class="wrap">
+<div class="eyebrow">Platform · Discovery AI</div>
+<h2>Discovery AI: a narrow, reproducible discovery engine</h2>
+<p class="muted">Four GPU-backed stages, orchestrated end to end in containers so every hit can be traced back to its data and model versions.</p>
+<div class="cards">
+<div><div class="n">01 · TARGET</div><h3>Target and signature discovery</h3><p>LLM agents mine literature and public omics (Open Targets, GTEx, CELLxGENE, GenAge, DrugAge) to rank targets and senescence signatures.</p></div>
+<div><div class="n">02 · SCREEN</div><h3>Structure, docking, signature reversal</h3><p>Boltz-2 and OpenFold3 structures, GNINA / Vina / DiffDock docking, and CMap–LINCS signature reversal across approved and Phase I-tested libraries.</p></div>
+<div><div class="n">03 · FILTER</div><h3>ADMET, safety, freedom to operate</h3><p>ADMET-AI and RDKit filters, physics-based refinement (OpenMM, OpenFE) and medicinal-chemistry review reduce hundreds of hits to a shortlist.</p></div>
+<div><div class="n">04 · VALIDATE</div><h3>Wet lab and clinic</h3><p>Senescence assays and C. elegans lifespan studies at contract labs, then biomarker-driven pilots in our partner Phase I unit.</p></div>
+</div>
+</div>
+</section>
+<section id="pipeline">
+<div class="wrap">
+<div class="eyebrow">Pipeline</div>
+<h2>Programs</h2>
+<div class="tblwrap">
+<table>
+<thead><tr><th style="width:34%">Program</th><th class="stage">Target ID</th><th class="stage">In silico screen</th><th class="stage">In vitro</th><th class="stage">In vivo</th><th class="stage">Clinical pilot</th></tr></thead>
+<tbody>
+<tr><td class="prog">NOVA-001 · Senolytic repurposing<small>Approved &amp; Phase I-tested molecules vs. senescence signatures</small></td><td class="bar" colspan="5"><div class="fill" style="width:36%"></div><div class="fill plan" style="left:36%;width:44%"></div></td></tr>
+<tr><td class="prog">NOVA-002 · Senomorphic (SASP) modulators<small>Repurposing against SASP signalling in stromal cells</small></td><td class="bar" colspan="5"><div class="fill" style="width:16%"></div><div class="fill plan" style="left:16%;width:44%"></div></td></tr>
+<tr><td class="prog">Target discovery · aging signatures<small>Ongoing signature and target ranking feeding future programs</small></td><td class="bar" colspan="5"><div class="fill" style="width:18%"></div></td></tr>
+</tbody>
+</table>
+</div>
+<div class="legend"><span><i></i>In progress</span><span><i class="plan"></i>Planned, six-month pilot (2026–2027)</span></div>
+</div>
+</section>
+<section id="compute">
+<div class="wrap">
+<div class="eyebrow">Compute &amp; data</div>
+<h2>Where the GPUs sit</h2>
+<div class="split">
+<div>
+<p>Daily inference — structure prediction, docking, generative chemistry — runs on an on-premise NVIDIA workstation. Peak screening campaigns burst to rented H100 / B200 capacity. Workflows run in Docker under Nextflow, with results and audit trails in an ELN so the data is IND-ready from day one.</p>
+<p>Patient-derived data is processed in a segregated, de-identified environment compliant with Panama's Ley 81 de 2019 and, for US data, HIPAA.</p>
+</div>
+<div class="stat">
+<div><b>100%</b><span>open-weight, commercially licensed models</span></div>
+<div><b>200–500</b><span>ranked molecules per screening campaign</span></div>
+<div><b>6 mo</b><span>from target to validated hits</span></div>
+<div><b>Phase I</b><span>clinical unit in the loop</span></div>
+</div>
+</div>
+<div class="stack">
+<div><div class="t">Structure &amp; affinity</div><code>Boltz-2</code><code>OpenFold3</code></div>
+<div><div class="t">Docking</div><code>GNINA</code><code>AutoDock Vina</code><code>DiffDock</code></div>
+<div><div class="t">Generative</div><code>REINVENT 4</code><code>RFdiffusion</code><code>ProteinMPNN</code></div>
+<div><div class="t">Physics</div><code>OpenMM</code><code>OpenFE</code></div>
+<div><div class="t">ADMET</div><code>ADMET-AI</code><code>RDKit</code></div>
+<div><div class="t">Orchestration</div><code>CUDA</code><code>Docker</code><code>Nextflow</code><code>Python</code></div>
+</div>
+</div>
+</section>
+<section id="team">
+<div class="wrap">
+<div class="eyebrow">Team</div>
+<h2>Built by clinicians who run trials</h2>
+<div class="person">
+<div class="avatar">AE</div>
+<div>
+<h3>Anton Edin, MD, PhD</h3>
+<div class="role">FOUNDER &amp; CEO</div>
+<p>Physician-entrepreneur. Founder of clinical research organizations and a network of medical centers, and of a Phase I clinical research unit in Panama that E-PharmNova uses for early clinical validation.</p>
+<p class="muted">Leads target selection, clinical strategy and partnerships.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="careers">
+<div class="wrap split">
+<div>
+<div class="eyebrow">Careers</div>
+<h2>We are hiring the first technical team</h2>
+<p class="muted">Remote-first. Latin America and Europe time zones preferred. Write to us with a short note and links to your work.</p>
+</div>
+<div class="jobs">
+<div class="job"><b>Computational chemist / ML engineer</b><span>Full-time · Remote</span></div>
+<div class="job"><b>Bioinformatician (omics, CMap, aging signatures)</b><span>Full or part-time · Remote</span></div>
+<div class="job"><b>Medicinal chemist</b><span>Consulting · Remote</span></div>
+</div>
+</div>
+</section>
+<section id="news">
+<div class="wrap">
+<div class="eyebrow">News</div>
+<h2>Updates</h2>
+<div class="news">
+<div><time>Sep 2026</time><span>Platform architecture and six-month repurposing pilot defined; hiring for the first technical roles opens.</span></div>
+<div><time>Jun 2026</time><span>E-PharmNova Holdings Inc. incorporated in Delaware, USA.</span></div>
+</div>
+</div>
+</section>
+<section id="contact" style="border-bottom:0">
+<div class="wrap">
+<div class="contact">
+<div>
+<div class="eyebrow">Partner with us</div>
+<h2>Pharma, CROs, investors, GPU and cloud partners</h2>
+<p>We co-develop repurposing programs, run early-phase studies for partners, and license validated hits.</p>
+<p><a class="mail" href="mailto:info@e-pharmnova.com">info@e-pharmnova.com</a></p>
+</div>
+<dl>
+<div><dt>Legal entity</dt><dd>E-PharmNova Holdings Inc.</dd></div>
+<div><dt>Registered</dt><dd>Delaware, United States · 2026</dd></div>
+<div><dt>Operations</dt><dd>Panama City, Panama</dd></div>
+</dl>
+</div>
+</div>
+</section>
+<footer>
+<div class="wrap">
+<div>© 2026 E-PharmNova Holdings Inc.</div>
+<div><a href="#platform">Platform</a><a href="#pipeline">Pipeline</a><a href="#careers">Careers</a><a href="#contact">Contact</a></div>
+</div>
+</footer>
+<script>
+(function(){
+var c=document.getElementById('mol'); if(!c) return;
+var ctx=c.getContext('2d'), W,H, pts=[], N=70, reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function size(){var r=c.parentNode.getBoundingClientRect();W=c.width=Math.floor(r.width*devicePixelRatio);H=c.height=Math.floor(r.height*devicePixelRatio);}
+function init(){pts=[];for(var i=0;i<N;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25*devicePixelRatio,vy:(Math.random()-.5)*.25*devicePixelRatio,r:(1.2+Math.random()*2.2)*devicePixelRatio});}
+function draw(){
+ctx.clearRect(0,0,W,H);
+var maxd=150*devicePixelRatio;
+for(var i=0;i<N;i++){var p=pts[i];
+if(!reduce){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
+for(var j=i+1;j<N;j++){var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+if(d<maxd){ctx.strokeStyle='rgba(95,211,173,'+(0.35*(1-d/maxd)).toFixed(3)+')';ctx.lineWidth=devicePixelRatio;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}
+}
+for(var k=0;k<N;k++){var s=pts[k];ctx.fillStyle='rgba(159,179,171,.9)';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();}
+if(!reduce)requestAnimationFrame(draw);
+}
+size();init();draw();
+window.addEventListener('resize',function(){size();init();if(reduce)draw();});
+})();
+</script>
+</body>
+</html>
